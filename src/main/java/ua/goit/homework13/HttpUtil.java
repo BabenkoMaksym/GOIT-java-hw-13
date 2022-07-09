@@ -31,13 +31,14 @@ public class HttpUtil {
     public static User updateUser(URI uri, User user) throws IOException, InterruptedException {
         final String requestBody = GSON.toJson(user);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri.toString() + "/"))
+                .uri(URI.create(uri.toString() + "/1"))
                 .header("Content-type", "application/json")
                 .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
         final HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
         return GSON.fromJson(response.body(), User.class);
     }
+
 
     public static int deleteUser(URI uri, User user) throws IOException, InterruptedException {
         final String requestBody = GSON.toJson(user);
